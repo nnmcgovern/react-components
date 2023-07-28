@@ -3,52 +3,41 @@ import { useState } from "react"
 function Counter() {
   const [count, setCount] = useState(0)
 
-  const increment = () => {
-    if (count < 30) {
-      setCount(count + 1)
-    }
-  }
-
-  const plusTen = () => {
-    if (count < 30) {
-      if (count + 10 > 30) {
-        setCount(30)
-      }
-      else {
-        setCount(count + 10)
-      }
-    }
-  }
-
-  const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1)
-    }
-  }
-
-  const minusTen = () => {
-    if (count > 0) {
-      if (count - 10 < 0) {
-        setCount(0)
-      }
-      else {
-        setCount(count - 10)
-      }
-    }
-  }
-
   const reset = () => {
     setCount(0)
+  }
+
+  const changeCount = value => {
+    if (count + value <= 50 && count + value >= 0) setCount(count + value)
   }
 
   return (
     <div>
       <span>Current Count: {count}</span>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-      <button onClick={plusTen}>+10</button>
-      <button onClick={minusTen}>-10</button>
-      <button onClick={reset}>Reset</button>
+
+      {count >= 50 ?
+        <button onClick={() => changeCount(1)} disabled={true}>+</button> :
+        <button onClick={() => changeCount(1)}>+</button>
+      }
+
+      {count <= 0 ?
+        <button onClick={() => changeCount(-1)} disabled={true}>-</button> :
+        <button onClick={() => changeCount(-1)}>-</button>
+      }
+
+      {count > 40 ?
+        <button onClick={() => changeCount(10)} disabled={true}>+10</button> :
+        <button onClick={() => changeCount(10)}>+10</button>
+      }
+
+      {count < 10 ?
+        <button onClick={() => changeCount(-10)} disabled={true}>-10</button> :
+        <button onClick={() => changeCount(-10)}>-10</button>
+      }
+
+      {count === 0 ?
+        <button onClick={reset} disabled={true}>Reset</button> :
+        <button onClick={reset}>Reset</button>}
     </div>
   )
 }
