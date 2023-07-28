@@ -43,7 +43,7 @@ function Counter() {
 
   return (
     <div>
-      <span>Current Count: ${count}</span>
+      <span>Current Count: {count}</span>
       <button onClick={increment}>+</button>
       <button onClick={decrement}>-</button>
       <button onClick={plusTen}>+10</button>
